@@ -54,7 +54,7 @@ def download_and_ffmpeg(out_dir, link, ffmpeg_func):
     temp_dir = tempfile.mkdtemp()
     temp_json = tempfile.mktemp()
     try:
-        print(f"Downloading {link} ")
+        print(f"Downloading {link} sorry for the lack of progress indicator")
         os.system(f"yt-dlp -j --no-simulate -P {temp_dir} {link} > {temp_json}")
     except Exception as e:
         print(f"Failed to download {link}: {e}")
