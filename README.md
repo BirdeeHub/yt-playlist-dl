@@ -33,11 +33,11 @@ git clone https://github.com/BirdeeHub/yt-playlist-dl
 
 nix develop github:BirdeeHub/yt-playlist-dl
 
-python3 ./main.py inputfile.html
+python3 ./yt-playlist-dl.py inputfile.html
 ```
 
 ```man
-COMMAND [-h] [-o OUTPUT] [-na] [-nv] input_file
+python3 ./yt-playlist-dl.py [-h] [-o OUTPUT] [-na] [-nv] input_file
 
 positional arguments:
   input_file            Input file to process

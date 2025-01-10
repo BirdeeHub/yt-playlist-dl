@@ -14,7 +14,7 @@
       , ...
     }: writeShellScriptBin APPNAME ''
       export PATH=$PATH:${lib.makeBinPath [ yt-dlp ]}
-      exec ${src-pyenv.interpreter} ${./main.py} "$@"
+      exec ${src-pyenv.interpreter} ${./${APPNAME}.py} "$@"
     '';
   in {
     overlays = {
