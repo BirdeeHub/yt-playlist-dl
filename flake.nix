@@ -10,34 +10,35 @@
       , lib
       , writeShellScriptBin
       , yt-dlp
-      , pyenv
+      , src-pyenv
       , ...
     }: writeShellScriptBin APPNAME ''
       export PATH=$PATH:${lib.makeBinPath [ yt-dlp ]}
-      exec ${pyenv.interpreter} ./main.py "$@"
+      exec ${src-pyenv.interpreter} ${./main.py} "$@"
     '';
   in {
     overlays = {
       default = final: prev: {
         ${APPNAME} = prev.callPackage program ({
           inherit APPNAME;
-          pyenv = prev.python3.withPackages (ps: [ ps.beautifulsoup4 ps.ffmpeg-python ]);
         } // inputs);
+      };
+      pyenv = final: prev: {
+        src-pyenv = prev.python3.withPackages (ps: [ ps.beautifulsoup4 ps.ffmpeg-python ]);
       };
     };
     packages = forAllSys (system: let
-      pkgs = import nixpkgs { inherit system; overlays = [ self.overlays.default ]; };
+      pkgs = import nixpkgs { inherit system; overlays = [ self.overlays.pyenv self.overlays.default ]; };
     in {
       default = pkgs.${APPNAME};
       ${APPNAME} = pkgs.${APPNAME};
     });
     devShells = forAllSys (system: let
-      pkgs = import nixpkgs { inherit system; };
-      pyenv = pkgs.python3.withPackages (ps: [ ps.beautifulsoup4 ps.ffmpeg-python ]);
+      pkgs = import nixpkgs { inherit system; overlays = [ self.overlays.pyenv ]; };
     in {
       default = pkgs.mkShell {
         name = "${APPNAME}-env";
-        packages = with pkgs; [ pyenv yt-dlg ];
+        packages = with pkgs; [ src-pyenv yt-dlg ];
       };
     });
   };
