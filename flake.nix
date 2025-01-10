@@ -4,7 +4,7 @@
   };
   outputs = {self, nixpkgs}@inputs: let
     forAllSys = nixpkgs.lib.genAttrs nixpkgs.lib.platforms.all;
-    APPNAME = "dlvids";
+    APPNAME = "yt-playlist-dl";
     program = {
       APPNAME
       , lib

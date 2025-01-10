@@ -75,7 +75,7 @@ def download_only(out_dir, link):
         print(f"Failed to download {link}: {e}")
 
 def main():
-    parser = argparse.ArgumentParser(description="download the html page with the playlist as input file, download the video and strip audio of all videos")
+    parser = argparse.ArgumentParser(description="an extremely simple script for downloading youtube playlists")
     # Adding required argument
     parser.add_argument('input_file', type=str, help="Input file to process")
     # Adding optional argument
