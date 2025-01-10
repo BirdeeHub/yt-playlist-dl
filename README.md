@@ -14,7 +14,7 @@ This is a VERY simple script, with subpar error handling and user feedback.
 
 It is also likely that youtube will change their page layouts in the future and break this script
 
-### Usage
+## Usage
 
 go to your youtube playlists and click view full playlist.
 
@@ -44,7 +44,7 @@ options:
   -nv, --no-video       whether to strip video
 ```
 
-### Dependencies
+## Dependencies
 
 Packaged for nix package manager via a flake.
 
