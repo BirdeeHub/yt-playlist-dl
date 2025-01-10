@@ -19,7 +19,7 @@ def read_file(file_path):
 
 def strip_video(input_file):
     base, ext = os.path.splitext(input_file)
-    output_file = f"{base}_modified{ext}"
+    output_file = f"{base}_audio_only{ext}"
     try:
         (
             ffmpeg
@@ -35,7 +35,7 @@ def strip_video(input_file):
 
 def strip_audio(input_file):
     base, ext = os.path.splitext(input_file)
-    output_file = f"{base}_modified{ext}"
+    output_file = f"{base}_video_only{ext}"
     try:
         (
             ffmpeg
