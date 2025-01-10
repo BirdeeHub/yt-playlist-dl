@@ -26,7 +26,11 @@ run the script on that file
 nix run github:BirdeeHub/yt-playlist-dl -- inputfile.html
 ```
 
+or
+
 ```bash
+nix develop github:BirdeeHub/yt-playlist-dl
+
 python3 ./main.py inputfile.html
 ```
 
@@ -50,7 +54,7 @@ Packaged for nix package manager via a flake.
 
 If you do not have nix package manager, you will need to install these dependencies to run the script successfully
 
-- python3
-- beautifulsoup4
-- ffmpeg-python
-- yt-dlp
+- yt-dlp (via os package manager)
+- python3 (via os package manager)
+- beautifulsoup4 (via pip)
+- ffmpeg-python (via pip)
