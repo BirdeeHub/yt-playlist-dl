@@ -29,6 +29,8 @@ nix run github:BirdeeHub/yt-playlist-dl -- inputfile.html
 or
 
 ```bash
+git clone https://github.com/BirdeeHub/yt-playlist-dl
+
 nix develop github:BirdeeHub/yt-playlist-dl
 
 python3 ./main.py inputfile.html
