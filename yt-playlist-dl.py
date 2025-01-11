@@ -81,31 +81,32 @@ def main():
     try:
         with open(args.input_file, 'r') as file:
             soup = BeautifulSoup(file.read(), "html.parser")
-            videos = [
-                re.sub(r"&.*", "", item['href'])
-                for item in soup.select("a#video-title")
-                if "style-scope" in item.find_parent().get("class", [])
-                and "ytd-playlist-video-renderer" in item.find_parent().get("class", [])
-            ]
 
-            out_dir = args.output
-            try:
-                os.mkdir(out_dir)
-                print(f"{out_dir}")
-            except Exception as e:
-                print(f"Could not create {out_dir} due to: {e}")
+        videos = [
+            re.sub(r"&.*", "", item['href'])
+            for item in soup.select("a#video-title")
+            if "style-scope" in item.find_parent().get("class", [])
+            and "ytd-playlist-video-renderer" in item.find_parent().get("class", [])
+        ]
 
-            i = 1
-            length = len(videos)
-            for link in videos:
-                print(f"{i}/{length}")
-                i += 1
-                if args.no_sound:
-                    download_and_ffmpeg(out_dir, link, strip_audio)
-                elif args.no_video:
-                    download_and_ffmpeg(out_dir, link, strip_video)
-                else:
-                    download_only(out_dir, link)
+        out_dir = args.output
+        try:
+            os.mkdir(out_dir)
+            print(f"{out_dir}")
+        except Exception as e:
+            print(f"Could not create {out_dir} due to: {e}")
+
+        i = 1
+        length = len(videos)
+        for link in videos:
+            print(f"{i}/{length}")
+            i += 1
+            if args.no_sound:
+                download_and_ffmpeg(out_dir, link, strip_audio)
+            elif args.no_video:
+                download_and_ffmpeg(out_dir, link, strip_video)
+            else:
+                download_only(out_dir, link)
 
     except FileNotFoundError:
         raise FileNotFoundError(f"File not found: {file_path}")
