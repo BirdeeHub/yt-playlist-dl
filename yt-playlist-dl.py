@@ -89,11 +89,13 @@ def main():
         ]
 
         out_dir = args.output
-        try:
-            os.mkdir(out_dir)
-            print(f"{out_dir}")
-        except Exception as e:
-            print(f"Could not create {out_dir} due to: {e}")
+        if not os.path.exists(out_dir):
+            try:
+                print(f"Creating output directory: {out_dir}")
+                os.mkdir(out_dir)
+            except Exception as e:
+                print(f"Could not create {out_dir} due to: {e}")
+                raise
 
         i = 1
         length = len(videos)
