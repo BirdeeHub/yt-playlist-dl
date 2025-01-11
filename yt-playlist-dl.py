@@ -47,9 +47,8 @@ def download_and_ffmpeg(out_dir, link, ffmpeg_func):
     try:
         print(f"Downloading {link}. Sorry for the lack of progress indicator.")
         os.system(f"yt-dlp -j --no-simulate -P {temp_dir} {link} > {temp_json}")
-        with open(temp_json, 'r') as file:
-            filename = json.load(file)['filename']
-        os.remove(temp_json)
+        with open(temp_json, 'r') as json_file:
+            filename = json.load(json_file)['filename']
         print(f"Converting {filename}")
         outfile = ffmpeg_func(filename)
         shutil.move(outfile, out_dir)
